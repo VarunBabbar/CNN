@@ -5,7 +5,7 @@ A customisable Convolutional Neural Network created from scratch using numpy arr
 3) Optimisers: Adam, SGD
 4) Loss: Cross Entropy, L2, L1
 5) Backprop across all operations
-6) Max accuracy of 79% on MNIST with 6 layer conv_bn_relu and maxpool architecture
+6) Max accuracy of 79.5% on MNIST with 8 layer conv_bn_relu and maxpool architecture
 7) Possible to customise architecture
 8) Fast enough for basic classification tasks -> Takes 5-10 min to train 500 examples and validate 200 examples of MNIST with the above architecture
 
