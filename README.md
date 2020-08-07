@@ -68,7 +68,8 @@ To run this project, first clone it onto your local machine:
     loss = loss_function(x_luv,y_luv)
     loss.backward()
     ```
-3) The SpatialGradient module evaluates a loss function on the gradient of an image. Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
+3) The SpatialGradient module evaluates a loss function on the gradient of an image. This is of the form: loss = - <img src="https://latex.codecogs.com/gif.latex?input_loss_func(\frac{d(G(z)}{dx},\frac{dY}{dx}) + input_loss_func(\frac{d(G(z)}{dy},\frac{dY}{dy}) + \lambda |G(z)-\mu_{G(z)}|=\text { Onset event at time bin } t " /> 
+Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
     An instance of SpatialGradient is of the form:
     
     ```python
