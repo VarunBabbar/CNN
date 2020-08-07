@@ -69,7 +69,7 @@ To run this project, first clone it onto your local machine:
     loss.backward()
     ```
 3) The SpatialGradient module evaluates a loss function on the gradient of an image. This is of the form: 
-   <img src="https://latex.codecogs.com/gif.latex?\L=\beta(\frac{d(G(z))}{dx},\frac{dY}{dx})+\beta(\frac{d(G(z))}{dy},\frac{dY}{dy})+\lambda|G(z)-\overbar{{G(z)}|" /> where <img src="https://latex.codecogs.com/gif.latex?\beta" /> is the loss function, <img src="https://latex.codecogs.com/gif.latex?G(z)" /> is the network output, <img src="https://latex.codecogs.com/gif.latex?Y" /> is the ground truth, <img src="https://latex.codecogs.com/gif.latex?\overbar{{G(z)}" /> is the mean value of the network output, and <img src="https://latex.codecogs.com/gif.latex?\lambda" /> is an adjustable hyperparameter (see the script SpatialGradient.py)
+   <img src="https://latex.codecogs.com/gif.latex?\L=\beta(\frac{d(G(z))}{dx},\frac{dY}{dx})+\beta(\frac{d(G(z))}{dy},\frac{dY}{dy})+\lambda|G(z)-\bar{{G(z)}|" /> where <img src="https://latex.codecogs.com/gif.latex?\beta" /> is the loss function, <img src="https://latex.codecogs.com/gif.latex?G(z)" /> is the network output, <img src="https://latex.codecogs.com/gif.latex?Y" /> is the ground truth, <img src="https://latex.codecogs.com/gif.latex?\bar{{G(z)}" /> is the mean value of the network output, and <img src="https://latex.codecogs.com/gif.latex?\lambda" /> is an adjustable hyperparameter (see the script SpatialGradient.py)
 Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
     An instance of SpatialGradient is of the form:
     
