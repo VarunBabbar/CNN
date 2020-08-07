@@ -74,7 +74,7 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     An instance of SpatialGradient is of the form:
     
     ```python
-    spatial_grad = SpatialGradient(loss_func = nn.MSELoss())
+    spatial_grad = SpatialGradient(loss_func = some_loss_function_specified_by_user, **kwargs)
     ```
     Example Usage: 
     
@@ -128,7 +128,7 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
 	    import SpatialGradient
     	    import torch
 	    dq_grad = SpatialGradient(loss_func = DQ())
-	    loss_function = MultiScale(loss_func=dq_grad, **kwargs)
+	    loss_function = MultiScale(loss_func=dq_grad)
 	    x = torch.rand(16,3,256,256)
 	    y = torch.rand(16,3,256,256)
 	    loss = dq_grad(x,y)
