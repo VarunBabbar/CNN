@@ -38,19 +38,19 @@ The modules are created with:
 ## Instructions for use
 To run this project, first clone it onto your local machine:
 
-```
-$ git clone xxx
-
-```
-1) The DQ module can be imported as:
     ```
+    $ git clone xxx
+
+    ```
+1) The DQ module can be imported as:
+    ```python
     import DQ
     dq = DQ(**kwargs)
     ```
     For a detailed description of input arguments, head over to the script DQ.py.
 
 3) To implement any loss function in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter()
-     ```
+     ```python
     import LUV_Converter
     luv = LUV_Converter()
     x = torch.rand(16,3,256,256)
@@ -62,7 +62,7 @@ $ git clone xxx
     loss = loss_function(x_luv,y_luv)
     ```
 1) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. To use it:
-    ```
+    ```python
     import MultiScale
     loss_function = MultiScale(loss_func=nn.MSELoss(), **kwargs)
     
