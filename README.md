@@ -32,7 +32,7 @@ There are several modules here that enable the user to implement different loss 
 	
 ## Usage
 The modules are created with:
-* Pytorch 1.6
+* PyTorch 1.6
 * Python 3.7
 	
 ## Instructions for use
