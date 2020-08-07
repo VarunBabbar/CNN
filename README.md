@@ -105,12 +105,19 @@ To run this project, first clone it onto your local machine:
     import MultiScale
     import torch.nn as nn
     import torch
-    loss_function = MultiScale(loss_func=nn.MSELoss(), **kwargs)
+    loss_function = MultiScale(loss_func=nn.MSELoss())
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
     loss = dq_grad(x,y)
     loss.backward()
     ```
+    
+    A MultiScale instance is of the form:
+    ```python
+    import MultiScale
+    multi_scale_loss = MultiScale(loss_function = nn.MSELoss(), **kwargs)
+    ```
+    For a detailed description of input arguments, head over to the script MultiScale.py
     
    It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. 
    a)
