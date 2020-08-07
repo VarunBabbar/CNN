@@ -68,10 +68,12 @@ To run this project, first clone it onto your local machine:
     ```
 3) The SpatialGradient module evaluates a loss function on the gradient of an image. Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
     An instance of SpatialGradient is of the form:
+    
     ```python
-       spatial_grad = SpatialGradient(loss_func = nn.MSELoss())
+    spatial_grad = SpatialGradient(loss_func = nn.MSELoss())
     ```
-
+    Example Usage: 
+    
     ```python
     import SpatialGradient
     mse_grad = SpatialGradient(loss_func = nn.MSELoss())
@@ -92,20 +94,45 @@ To run this project, first clone it onto your local machine:
     For a detailed description of input arguments, head over to the script SpatialGradient.py
 
 
-4) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. To use it:
+4) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. Example Usage:
     ```python
     import MultiScale
     loss_function = MultiScale(loss_func=nn.MSELoss(), **kwargs)
-    
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    loss = dq_grad(x,y)
+    loss.backward()
     ```
-    For a detailed description of input arguments, head over to the script MultiScale.py.
+    
+   It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. 
+   a)
+	   ```python
+	    import MultiScale
+	    import SpatialGradient
+	    dq_grad = SpatialGradient(loss_func = DQ())
+	    loss_function = MultiScale(loss_func=dq_grad, **kwargs)
+	    x = torch.rand(16,3,256,256)
+	    y = torch.rand(16,3,256,256)
+	    loss = dq_grad(x,y)
+	    loss.backward()
+	    ```
+    b) 
+	    ```python
+	    import MultiScale
+	    import SpatialGradient
+	    dq_multi_scale = MultiScale(loss_func=DQ(), **kwargs)
+	    dq_grad_multiscale = SpatialGradient(loss_func = dq_multi_scale)
+	    x = torch.rand(16,3,256,256)
+	    y = torch.rand(16,3,256,256)
+	    loss = dq_grad(x,y)
+	    loss.backward()
+	    ```
+    The difference between a) and b) is that in a), the image is transformed into an image pyramid, and for each image at each level and octave, DQ is applied on the gradient of the image at that scale. In b), the the gradient of the image is taken first and then the image gradient is transformed into a multi-scale pyramid (for DQ loss to be applied).
+    
+   
+   
+For a detailed description of input arguments, head over to the script MultiScale.py.
 
-
-	
-	⁃	To implement the loss functions in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter(). A given loss can be implemented as: loss = loss_func(luv(x),luv(y))
-	⁃	
 	⁃	Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: vgg_loss = VGG_Normalized(loss_func=nn.MSELoss()). 
-	⁃	It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. For example: gradient_loss_dq_multi_scale_gaussian = MultiScale(loss_func=SpatialGradient(loss_func=DQ(),orientation=True), pyramid=“Gaussian”, kwargs). Thus, loss = gradient_loss_dq_multi_scale_gaussian(x,y)
-	⁃	
 
 
