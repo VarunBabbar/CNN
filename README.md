@@ -46,10 +46,14 @@ To run this project, first clone it onto your local machine:
     ```python
     import DQ
     dq = DQ(**kwargs)
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    dq_loss = dq(x,y)
+    dq_loss.backward()
     ```
     For a detailed description of input arguments, head over to the script DQ.py.
 
-3) To implement any loss function in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter()
+2) To implement any loss function in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter()
      ```python
     import LUV_Converter
     luv = LUV_Converter()
@@ -60,8 +64,35 @@ To run this project, first clone it onto your local machine:
     
     loss_function = DQ()
     loss = loss_function(x_luv,y_luv)
+    loss.backward()
     ```
-1) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. To use it:
+3) The SpatialGradient module evaluates a loss function on the gradient of an image. Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
+    An instance of SpatialGradient is of the form:
+    ```python
+       spatial_grad = SpatialGradient(loss_func = nn.MSELoss())
+    ```
+
+    ```python
+    import SpatialGradient
+    mse_grad = SpatialGradient(loss_func = nn.MSELoss())
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    loss = mse_grad(x,y)
+    loss.backward()
+    ```
+    It is also possible to add any other pytorch loss functions as input arguments, including the modules in this repository.
+     ```python
+    import SpatialGradient
+    dq_grad = SpatialGradient(loss_func = DQ())
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    loss = dq_grad(x,y)
+    loss.backward()
+    ```
+    For a detailed description of input arguments, head over to the script SpatialGradient.py
+
+
+4) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. To use it:
     ```python
     import MultiScale
     loss_function = MultiScale(loss_func=nn.MSELoss(), **kwargs)
@@ -72,7 +103,7 @@ To run this project, first clone it onto your local machine:
 
 	
 	⁃	To implement the loss functions in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter(). A given loss can be implemented as: loss = loss_func(luv(x),luv(y))
-	⁃	The SpatialGradient module evaluates a loss function on the gradient of an image. Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. Instantiate the module as: loss = SpatialGradient(loss_func = nn.MSELoss(),**kwargs).
+	⁃	
 	⁃	Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: vgg_loss = VGG_Normalized(loss_func=nn.MSELoss()). 
 	⁃	It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. For example: gradient_loss_dq_multi_scale_gaussian = MultiScale(loss_func=SpatialGradient(loss_func=DQ(),orientation=True), pyramid=“Gaussian”, kwargs). Thus, loss = gradient_loss_dq_multi_scale_gaussian(x,y)
 	⁃	
