@@ -25,7 +25,7 @@ The codebase contains several different modules, which allows it to be fully cus
 ## Table of contents
 * [General info](#general-info)
 * [Usage](#usage)
-* [Setup](#setup)
+* [Instructions for use](#instructions-for-use)
 
 ## General info
 There are several modules here that enable the user to implement different loss functions / customize their own loss functions. These loss functions are primarily created in order to determine the properties of an ideal perceptual loss function that can be used in image to image translation networks.
