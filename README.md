@@ -45,6 +45,7 @@ To run this project, first clone it onto your local machine:
 1) The DQ module can be imported as:
     ```python
     import DQ
+    import torch
     dq = DQ(**kwargs)
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
@@ -57,6 +58,7 @@ To run this project, first clone it onto your local machine:
      ```python
     import LUV_Converter
     luv = LUV_Converter()
+    import torch
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
     x_luv = luv(x)
@@ -76,6 +78,8 @@ To run this project, first clone it onto your local machine:
     
     ```python
     import SpatialGradient
+    import torch.nn as nn
+    import torch
     mse_grad = SpatialGradient(loss_func = nn.MSELoss())
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
@@ -85,6 +89,8 @@ To run this project, first clone it onto your local machine:
     It is also possible to add any other pytorch loss functions as input arguments, including the modules in this repository.
      ```python
     import SpatialGradient
+    import DQ
+    import torch
     dq_grad = SpatialGradient(loss_func = DQ())
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
@@ -97,6 +103,8 @@ To run this project, first clone it onto your local machine:
 4) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. Example Usage:
     ```python
     import MultiScale
+    import torch.nn as nn
+    import torch
     loss_function = MultiScale(loss_func=nn.MSELoss(), **kwargs)
     x = torch.rand(16,3,256,256)
     y = torch.rand(16,3,256,256)
@@ -109,6 +117,7 @@ To run this project, first clone it onto your local machine:
 	   ```python
 	    import MultiScale
 	    import SpatialGradient
+    	    import torch
 	    dq_grad = SpatialGradient(loss_func = DQ())
 	    loss_function = MultiScale(loss_func=dq_grad, **kwargs)
 	    x = torch.rand(16,3,256,256)
@@ -120,6 +129,7 @@ To run this project, first clone it onto your local machine:
 	    ```python
 	    import MultiScale
 	    import SpatialGradient
+	    import torch
 	    dq_multi_scale = MultiScale(loss_func=DQ(), **kwargs)
 	    dq_grad_multiscale = SpatialGradient(loss_func = dq_multi_scale)
 	    x = torch.rand(16,3,256,256)
