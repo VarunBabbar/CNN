@@ -14,7 +14,6 @@ In the future:
 2) Expanded scope beyond classification -> More along the lines of generation (Something like a GAN)
 3) Improved speed
 
-<div style="display:none">
 # SR_ResNet
 
 README: Instructions for training and obtaining results for different loss functions
@@ -153,5 +152,3 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
 For a detailed description of input arguments, head over to the script MultiScale.py.
 
 	⁃	Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: vgg_loss = VGG_Normalized(loss_func=nn.MSELoss()). 
-
-</div>
