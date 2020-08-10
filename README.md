@@ -27,7 +27,7 @@ The codebase contains several different modules, which allows it to be fully cus
 * [Instructions for use](#instructions-for-use)
 
 ## General info
-There are several modules here that enable the user to implement different loss functions / customize their own loss functions. These loss functions are primarily created in order to determine the properties of an ideal perceptual loss function that can be used in image to image translation networks.
+There are several modules here that enable the user to implement different loss functions / customize their own loss functions. These loss functions are primarily created in order to determine the properties of an ideal perceptual loss function that can be used in image to image translation networks. As with any other nn.Module inherited class, these modules expec the input to be in the for B*C*H*W where B is the batch size and C is the number of channels
 	
 ## Usage
 The modules are created with:
