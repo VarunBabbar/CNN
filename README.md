@@ -41,7 +41,9 @@ To run this project, first clone it onto your local machine:
     $ git clone xxx
 
     ```
-1) The DQ module can be imported as:
+1) The file inference.py is used to generate output text files and best epoch images for SR_ResNet on the loss function you choose. It is assumed that model checkpoints for n training epochs are present in the folder /SR_ResNet/Models_for_Report. For instructions on how to run generate output text files and images, head over to inference.py
+
+2) The DQ module can be imported as:
     ```python
     import DQ
     import torch
@@ -53,7 +55,7 @@ To run this project, first clone it onto your local machine:
     ```
     For a detailed description of input arguments, head over to the script DQ.py.
 
-2) To implement any loss function in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter()
+3) To implement any loss function in LUV colorspace, import the module LUV_Converter and instantiate it as luv = LUV_Converter()
      ```python
     import LUV_Converter
     luv = LUV_Converter()
@@ -67,7 +69,7 @@ To run this project, first clone it onto your local machine:
     loss = loss_function(x_luv,y_luv)
     loss.backward()
     ```
-3) The SpatialGradient module evaluates a loss function on the gradient of an image. This is of the form: 
+4) The SpatialGradient module evaluates a loss function on the gradient of an image. This is of the form: 
    <img src="https://latex.codecogs.com/gif.latex?\L=\beta(\frac{d(G(z))}{dx},\frac{dY}{dx})+\beta(\frac{d(G(z))}{dy},\frac{dY}{dy})+\lambda|G(z)-\bar{{G(z)}|" /> where <img src="https://latex.codecogs.com/gif.latex?\beta" /> is the loss function, <img src="https://latex.codecogs.com/gif.latex?G(z)" /> is the network output, <img src="https://latex.codecogs.com/gif.latex?Y" /> is the ground truth, <img src="https://latex.codecogs.com/gif.latex?\bar{{G(z)}" /> is the mean value of the network output, and <img src="https://latex.codecogs.com/gif.latex?\lambda" /> is an adjustable hyperparameter (see the script SpatialGradient.py)
 Here, the user has the option of choosing to evaluate the loss on both the gradient magnitude and orientation. 
     An instance of SpatialGradient is of the form:
@@ -101,7 +103,7 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     For a detailed description of input arguments, head over to the script SpatialGradient.py
 
 
-4) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. Example Usage:
+5) The Multi Scale inherits nn.Module and is differentiable. It accepts a loss function as input and has several customisable parameters. Example Usage:
     ```python
     import MultiScale
     import torch.nn as nn
@@ -150,7 +152,7 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     
     For a detailed description of input arguments, head over to the script MultiScale.py.
  
-5) Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: 
+6) Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: 
     ```python
     import VGGPerceptualLoss
     import VGGNormalized
@@ -162,7 +164,6 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     loss.backward()
 	```
  
-6) The file inference.py is used to generate output text files and best epoch images for SR_ResNet on the loss function you choose. It is assumed that model checkpoints for n training epochs are present in the folder /SR_ResNet/Models_for_Report. For instructions on how to run generate output text files and images, head over to inference.py
    
 
    
