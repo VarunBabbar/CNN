@@ -122,29 +122,29 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     
    It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. 
    a)
-	   ```python
-	    import MultiScale
-	    import SpatialGradient
-    	    import torch
-	    dq_grad = SpatialGradient(loss_func = DQ())
-	    loss_function = MultiScale(loss_func=dq_grad)
-	    x = torch.rand(16,3,256,256)
-	    y = torch.rand(16,3,256,256)
-	    loss = dq_grad(x,y)
-	    loss.backward()
-	    ```
-    b) 
-	    ```python
-	    import MultiScale
-	    import SpatialGradient
-	    import torch
-	    dq_multi_scale = MultiScale(loss_func=DQ(), **kwargs)
-	    dq_grad_multiscale = SpatialGradient(loss_func = dq_multi_scale)
-	    x = torch.rand(16,3,256,256)
-	    y = torch.rand(16,3,256,256)
-	    loss = dq_grad(x,y)
-	    loss.backward()
-	    ```
+   ```python
+    import MultiScale
+    import SpatialGradient
+    import torch
+    dq_grad = SpatialGradient(loss_func = DQ())
+    loss_function = MultiScale(loss_func=dq_grad)
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    loss = dq_grad(x,y)
+    loss.backward()
+    ```
+   b) 
+    ```python
+    import MultiScale
+    import SpatialGradient
+    import torch
+    dq_multi_scale = MultiScale(loss_func=DQ(), **kwargs)
+    dq_grad_multiscale = SpatialGradient(loss_func = dq_multi_scale)
+    x = torch.rand(16,3,256,256)
+    y = torch.rand(16,3,256,256)
+    loss = dq_grad(x,y)
+    loss.backward()
+    ```
     The difference between a) and b) is that in a), the image is transformed into an image pyramid, and for each image at each level and octave, DQ is applied on the gradient of the image at that scale. In b), the the gradient of the image is taken first and then the image gradient is transformed into a multi-scale pyramid (for DQ loss to be applied). 
     
     For a detailed description of input arguments, head over to the script MultiScale.py.
