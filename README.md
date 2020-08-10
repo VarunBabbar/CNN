@@ -121,6 +121,7 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
     For a detailed description of input arguments, head over to the script MultiScale.py
     
    It is possible to have a MultiScale loss as an argument to the SpatialGradient function and vice versa. 
+   
    a)
    ```python
     import MultiScale
