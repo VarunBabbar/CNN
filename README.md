@@ -146,9 +146,21 @@ Here, the user has the option of choosing to evaluate the loss on both the gradi
 	    loss.backward()
 	    ```
     The difference between a) and b) is that in a), the image is transformed into an image pyramid, and for each image at each level and octave, DQ is applied on the gradient of the image at that scale. In b), the the gradient of the image is taken first and then the image gradient is transformed into a multi-scale pyramid (for DQ loss to be applied).
-    
+ 
+5) The file inference.py is used to generate output text files and best epoch images for SR_ResNet on the loss function you choose. It is assumed that model checkpoints for n training epochs are present in the folder /SR_ResNet/Models_for_Report. For instructions on how to run generate output text files and images, head over to inference.py
    
+
    
 For a detailed description of input arguments, head over to the script MultiScale.py.
 
-	⁃	Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: vgg_loss = VGG_Normalized(loss_func=nn.MSELoss()). 
+5) Loss functions can be evaluated on VGG channels by importing the VGG_Normalized module. For example: 
+ ```python
+ import VGGPerceptualLoss
+ import VGGNormalized
+ vgg = VGGPerceptualLoss()
+ vgg_loss_mse = VGG_Normalized(vgg,loss_func=nn.MSELoss()) # Can also add any other loss, for example MultiScale or DQ losses here
+ x = torch.rand(16,3,256,256)  
+ y = torch.rand(16,3,256,256)
+ loss = dq_grad(x,y)
+ loss.backward()
+ ```
