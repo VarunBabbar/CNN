@@ -14,7 +14,7 @@ In the future:
 2) Expanded scope beyond classification -> More along the lines of generation (Something like a GAN)
 3) Improved speed
 
-
+1) The file inference.py is used to generate output text files and best epoch images for SR_ResNet on the loss function you choose. It is assumed that model checkpoints for n training epochs are present in the folder /SR_ResNet/Models_for_Report. For instructions on how to run generate output text files and images, head over to inference.py
  
    
 
