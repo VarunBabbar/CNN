@@ -35,7 +35,6 @@ Training involves running the script CNN.py. Here is the syntax for calling CNN.
               [--step STEP] [--model_save_path MODEL_SAVE_PATH]
               [--lr_multiplier LR_MULTIPLIER] [--optimizer OPTIMIZER]
               [--num_examples NUM_EXAMPLES] [--val_examples VAL_EXAMPLES]
-              [-f F]
 
 CNN for MNIST or basic classification tasks
 
