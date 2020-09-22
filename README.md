@@ -43,8 +43,6 @@ optional arguments:
                         training batch size
   --nEpochs NEPOCHS     number of epochs to train for
   --lr LR               Learning Rate. Default=1e-4
-  --step STEP           Sets the learning rate to the initial LR decayed by
-                        momentum every n epochs, Default: n=500
   --model_save_path MODEL_SAVE_PATH
                         Full Path to trained Model (including model name)
   --lr_multiplier LR_MULTIPLIER
@@ -54,13 +52,17 @@ optional arguments:
   --optimizer OPTIMIZER
                         Optimizer for training: adam or sgd
   --num_examples NUM_EXAMPLES
-                        Optimizer for training: adam or sgd
+                        Number of training examples
   --val_examples VAL_EXAMPLES
-                        Optimizer for training: adam or sgd
+                        Number of test examples
    ```  
 
 
-
+ ### Example usage:
+ ```
+ python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer "adam" --num_examples 10000 --val_examples 2500
+ ```
+ 
 
 
 
