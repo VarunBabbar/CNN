@@ -61,7 +61,7 @@ optional arguments:
 
  ### Example usage:
  ```
- python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer "adam" --num_examples 10000 --val_examples 2500
+ python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer adam --num_examples 10000 --val_examples 2500
  ```
  
 
