@@ -18,8 +18,9 @@ A customisable Convolutional Neural Network created from scratch using numpy arr
 
 In the future:
 1) Residual connections (Hopefully it should be possible to create a ResNet 13 from scratch)
-2) Expanded scope beyond classification -> More along the lines of generation (Something like a GAN)
+2) Expanded scope beyond classification -> More along the lines of generation (Maybe a GAN?)
 3) Improved speed
+4) More optimizers including SGD with momentum, Adagrad, and RMSProp
 
 ## Dependencies
 The modules are created with:
