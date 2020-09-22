@@ -1,3 +1,5 @@
+# An implementation of a Vanilla CNN from scratch 
+
 ## Table of contents
 * [General info](#general-info)
 * [Dependencies](#dependencies)
