@@ -2,20 +2,31 @@ import numpy as np
 import torch
 import os
 import argparse
+import pickle
+from PIL import Image
+import sys
 
 parser = argparse.ArgumentParser(description="CNN for MNIST or basic classification tasks")
-parser.add_argument("--model_save_path",  type=str, default="/Users/varunbabbar/Desktop",help="The directory to save the model to (including model name)")
+parser.add_argument("--model_save_path",  type=str, default="/Users/varunbabbar/Desktop/CNN_Architecture",help="The directory to save the model to (including model name)")
+parser.add_argument("--input_image", type=str, default="", help="Full path to the input image that is being classified")
+opt = parser.parse_args()
 
+model_save_path = opt.model_save_path
+input_image_path = opt.input_image
 
+X = np.array(Image.open(input_image_path))
+if len(X.shape) == 2:
+    X = np.expand_dims(X, axis=0)
 
-
+with open(model_save_path, 'rb') as f:
+    architecture = pickle.load(f)
+    
 
 def forward_pass(X,architecture):
     
     """Performs a forward pass over the neural network and stores the
     resulting weights and features in the architecture dictionary.
     """
-    
    
     architecture['layer1'][0] = X
     kernel_shape1 = architecture['layer1'][7]
@@ -136,3 +147,7 @@ def forward_pass(X,architecture):
                 y_pred = architecture['layer{}'.format(len(architecture))][1]
                 
     return y_pred
+
+y_pred = forward_pass(X,architecture)
+
+sys.stdout.write(str(np.argmax(y_pred)))
