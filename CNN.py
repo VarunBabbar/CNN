@@ -20,12 +20,11 @@ parser = argparse.ArgumentParser(description="CNN for MNIST or basic classificat
 parser.add_argument("--batchSize", type=int, default=32, help="training batch size")
 parser.add_argument("--nEpochs", type=int, default=7, help="number of epochs to train for")
 parser.add_argument("--lr", type=float, default=1e-2, help="Learning Rate. Default=1e-4")
-parser.add_argument("--step", type=int, default=1, help="Sets the learning rate to the initial LR decayed by momentum every n epochs, Default: n=500")
-parser.add_argument("--model_save_path",  type=str, default="/Users/varunbabbar/Desktop",help="Full Path to trained Model (including model name)")
+parser.add_argument("--model_save_path",  type=str, default="/Users/varunbabbar/Desktop",help="The directory to save the model to (including model name)")
 parser.add_argument("--lr_multiplier", type=float, default = -0.08, help="The decay factor of the learning rate. A more negative factor will cause a greater exponential decay of the learning rate over training epochs")
 parser.add_argument("--optimizer", type=str, default="adam", help="Optimizer for training: adam or sgd")
-parser.add_argument("--num_examples", type=int, default=10000, help="Optimizer for training: adam or sgd")
-parser.add_argument("--val_examples", type=int, default=2000, help="Optimizer for training: adam or sgd")
+parser.add_argument("--num_examples", type=int, default=10000, help="Number of training examples")
+parser.add_argument("--val_examples", type=int, default=2000, help="Number of test examples")
 parser.add_argument("-f")
 opt = parser.parse_args()
 bs = opt.batchSize
@@ -413,11 +412,8 @@ def adam(g,beta_1,beta_2,m,v,t,lr):
     return grad,m,v
 
 def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
-    
     """Performs a backward pass over the neural network.
     This involves calculating the gradients in each layer and storing them in the gradient_layerwise dictionary"""
-    
-  
     for layer in range(len(architecture)-1,-1,-1):
             X_input,X_output,weightsi,biasi,X_input_im2col,imi,output_shapei,kernel_shapei,stridei,operationi,imxi = architecture['layer{}'.format(layer+1)]
 #             print("Operation is:{} and Layer is: {}".format(operationi,layer+1))
@@ -705,12 +701,9 @@ def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
     return
 
 def forward_pass(X,architecture):
-    
     """Performs a forward pass over the neural network and stores the
     resulting weights and features in the architecture dictionary.
     """
-    
-   
     architecture['layer1'][0] = X
     kernel_shape1 = architecture['layer1'][7]
     stride1 = architecture['layer1'][8]
@@ -832,11 +825,8 @@ def forward_pass(X,architecture):
     return y_pred
 
 def zero_gradients(architecture):
-    
     """Initialising grad weights dictionary for each layer
       for the purpose of mini-batch gradient descent"""
-    
-    
     grad_weights = {}
     grad_bias = {}
     
