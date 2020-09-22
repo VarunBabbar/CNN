@@ -413,8 +413,11 @@ def adam(g,beta_1,beta_2,m,v,t,lr):
     return grad,m,v
 
 def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
+    
     """Performs a backward pass over the neural network.
     This involves calculating the gradients in each layer and storing them in the gradient_layerwise dictionary"""
+    
+  
     for layer in range(len(architecture)-1,-1,-1):
             X_input,X_output,weightsi,biasi,X_input_im2col,imi,output_shapei,kernel_shapei,stridei,operationi,imxi = architecture['layer{}'.format(layer+1)]
 #             print("Operation is:{} and Layer is: {}".format(operationi,layer+1))
@@ -702,9 +705,12 @@ def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
     return
 
 def forward_pass(X,architecture):
+    
     """Performs a forward pass over the neural network and stores the
     resulting weights and features in the architecture dictionary.
     """
+    
+   
     architecture['layer1'][0] = X
     kernel_shape1 = architecture['layer1'][7]
     stride1 = architecture['layer1'][8]
@@ -826,8 +832,11 @@ def forward_pass(X,architecture):
     return y_pred
 
 def zero_gradients(architecture):
+    
     """Initialising grad weights dictionary for each layer
       for the purpose of mini-batch gradient descent"""
+    
+    
     grad_weights = {}
     grad_bias = {}
     
