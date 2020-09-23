@@ -4,6 +4,7 @@
 * [General info](#general-info)
 * [Dependencies](#dependencies)
 * [Training Procedure](#training-procedure)
+* [Inference Procedure](#inference-procedure)
 
 ## General info  
 A customisable Convolutional Neural Network created from scratch using numpy arrays and torch tensors. Work still in progress, but current features include:
@@ -65,8 +66,8 @@ optional arguments:
  python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer adam --num_examples 10000 --val_examples 2500
  ```
  
- ## Training Procedure
-Inference involves running the script Inference.py. This assumes you have a trained model saved and an input image stored as a jpg or png file. Here is the syntax for calling Inference.py through command line:
+ ## Inference Procedure
+Inference involves running the script Inference.py. This assumes you have a trained model and input image saved in your local filesystem. Here is the syntax for calling Inference.py through command line:
  ```
    usage: CNN_inference.py [-h] [--model_save_path MODEL_SAVE_PATH]
                         [--input_image INPUT_IMAGE]
