@@ -25,11 +25,13 @@ with open(model_save_path, 'rb') as f:
     architecture = pickle.load(f)
 
 def im2col(X,kernel,stride,im_needed = True,shape_specified = False):
+    
         """Assuming X and the kernel are 2D inputs
             We transform the input matrix X into a matrix Ω(x) such that the columns correspond to the
             set of elements that will be multiplied by the kernel in each sliding convolution operation
             Given x -> Ω(x), conv2d(x,kernel) = Ω(x)' * kernel where ' denotes a transpose operation
         """
+        
         try:
             X = X.detach().numpy()
         except:
@@ -97,20 +99,26 @@ def im2col(X,kernel,stride,im_needed = True,shape_specified = False):
             return output_matrix,-1
 
 def cross_entropy(y_pred,y):
+    
     """ Cross entropy loss for classification purposes"""
+    
     epsilon = 0.001 # To prevent overflow and ensure numerical stability
     return sum(-y*np.log(y_pred+epsilon))
 
 def sigmoid(X):
+    
     """ Sigmoid Activation Function"""
+    
     X[X < -300] = -300 # For stability
     X = X.detach().numpy()
     X = torch.FloatTensor((1/(1+(np.exp(-X)))))
     return X
     
 def softmax(y):
+    
     """ Simple softmax activation with enhanced stability
     """
+    
 #     y = y.squeeze()
     epsilon = 0.001
     y = y.detach().numpy()
@@ -121,8 +129,10 @@ def softmax(y):
     return torch.Tensor(softmax)
     
 def relu(x):
+    
     """ ReLU Activation Function
     """
+    
     return x.clamp_min(0.)
     
 def maxpool_im2col(X,kernel_shape,stride):
@@ -202,8 +212,10 @@ def BatchNorm(X):
     return bn
 
 def flatten_and_dense(X,out_channels,*args,activation = 'relu', initialise_weights = False):
+    
     """ Flattens the input and outputs a fully connected dense layer after applying an activation function
         Extra args correspond to weights and biases input"""
+    
     shape = X.shape
     X = torch.reshape(X,(-1,1)) # Flatten
     if initialise_weights:
