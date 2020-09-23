@@ -65,6 +65,33 @@ optional arguments:
  python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer adam --num_examples 10000 --val_examples 2500
  ```
  
+ ## Training Procedure
+Inference involves running the script Inference.py. This assumes you have a trained model saved and an input image stored as a jpg or png file. Here is the syntax for calling Inference.py through command line:
+ ```
+   usage: CNN_inference.py [-h] [--model_save_path MODEL_SAVE_PATH]
+                        [--input_image INPUT_IMAGE]
+
+CNN for MNIST or basic classification tasks
+
+arguments:
+  -h, --help            show this help message and exit
+  --model_save_path MODEL_SAVE_PATH
+                        The directory to save the model to (including model
+                        name)
+  --input_image INPUT_IMAGE
+                        Full path to the input image that is being classified
+
+   ```  
+
+
+ ### Example usage:
+ ```
+ python3 CNN_inference.py --model_save_path /Users/varunbabbar/Desktop/CNN_Architecture --input_image /Users/varunbabbar/Desktop/4.jpg
+ 
+ Predicted Number: 4
+ ```
+ 
+ 
 
 
 
