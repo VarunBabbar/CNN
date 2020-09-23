@@ -60,11 +60,12 @@ optional arguments:
                         Number of test examples
    ```  
 
-
  ### Example usage:
  ```
  python3 CNN.py --batchSize 32 --nEpochs 10 --lr 0.01 --lr_multiplier -0.08 --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --optimizer adam --num_examples 10000 --val_examples 2500
  ```
+ 
+ The output will be a file called MNIST_CNN saved in /Users/varunbabbar/Desktop. This file contains the saved weights and model architecture and can be used to perform inference.
  
  ## Inference Procedure
 Inference involves running the script Inference.py. This assumes you have a trained model and input image saved in your local filesystem. Here is the syntax for calling Inference.py through command line:
