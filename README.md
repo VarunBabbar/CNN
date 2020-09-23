@@ -5,6 +5,7 @@
 * [Dependencies](#dependencies)
 * [Training Procedure](#training-procedure)
 * [Inference Procedure](#inference-procedure)
+* [Useful Resources](#useful-resources)
 
 ## General info  
 A customisable Convolutional Neural Network created from scratch using numpy arrays and torch tensors. Work still in progress, but current features include:
@@ -95,8 +96,11 @@ arguments:
  ```
  
  
+ 
 
-
+ ## Useful Resources
+ 
+The file CNN_Notes.pdf contains all the mathematical background of how forward and back propagation takes place in a modern Deep Learning network. It is written by Jianxin Wu of the Lambda Group in Nanjing University, China. I found this quite a useful resource to wrap my head around some concepts, especially how backpropagation takes place through a convolution layer.
 
 
 
