@@ -28,7 +28,7 @@ The modules are created with:
 * [PyTorch 1.6](https://pytorch.org/get-started/locally/)
 * Python 3.7
 * [Numpy 1.19.2](https://pypi.org/project/numpy/)
-* [Pickle](https://pypi.org/project/pickle-mixin/)
+* [Pickle 1.0.2](https://pypi.org/project/pickle-mixin/)
 
 
 ## Training Procedure
