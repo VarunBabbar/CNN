@@ -153,7 +153,7 @@ def conv2D(null,channels,X,stride,kernel_shape,padding = False,initialize_weight
             # If padding is enabled, we pad the input with zeros such that the input size
             # remains the same if weights with stride 1 are applied to the input
             if initialize_weights:
-                kernel = np.random.uniform(-0.01,0.01,size = (kernel_shape[0],kernel_shape[1],kernel_shape[2])) # Our input
+                kernel = np.random.normal(size = (kernel_shape[0],kernel_shape[1],kernel_shape[2]))*math.sqrt(1/(kernel_shape[0]*kernel_shape[1]*kernel_shape[2])) # Our input
                 kernel = torch.FloatTensor(kernel)
                 kernel.requires_grad = False
             else:
@@ -189,12 +189,12 @@ def conv2D(null,channels,X,stride,kernel_shape,padding = False,initialize_weight
                 # num_filters. So we need to stack weight vectors horizontally and create num_filters number of
                 # feature maps
                 for i in range(channels-1):
-                    weight2 = np.random.uniform(-0.01,0.01,size = (kernel_shape[0]*kernel_shape[1]*kernel_shape[2],1)) # Our input
+                    weight2 = np.random.normal(size = (kernel_shape[0]*kernel_shape[1]*kernel_shape[2],1))*math.sqrt(1/(kernel_shape[0]*kernel_shape[1]*kernel_shape[2])) # Our input
                     weight2 = torch.FloatTensor(weight2)
                     weight2.requires_grad = False
                     weight = torch.cat((weight2, weight),1) # do this num_filters - 1 number of times
                 conv_output = torch.t(X_im2col).mm(weight)
-                bias = torch.Tensor(np.random.uniform(-0.01,0.01,size = conv_output.shape))
+                bias = torch.Tensor(np.random.normal(size = conv_output.shape))
                 conv_output += bias
                 conv_output = torch.reshape(conv_output,(output_shape))
                 return torch.nn.Parameter(conv_output), torch.nn.Parameter(weight),X_im2col,im, output_shape,bias
