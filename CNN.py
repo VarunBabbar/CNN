@@ -142,6 +142,7 @@ def im2col(X,kernel,stride,im_needed = True,shape_specified = False):
             return output_matrix,-1
     
 def conv2D(null,channels,X,stride,kernel_shape,padding = False,initialize_weights = True,*args):
+
             """ Applies a 2D convolution over the input features.
             This is slightly different from the conv2D operation in PyTorch.
             In this operation there are C_out 3D kernels of shape (C_in,K_w,K_h)
@@ -270,11 +271,14 @@ def maxpool_im2col(X,kernel_shape,stride):
     return X_im2c
 
 def relu(x):
+
     """ ReLU Activation Function
     """
+    
     return x.clamp_min(0.)
 
 def softmax(y):
+
     """ Simple softmax activation with enhanced stability
     """
 #     y = y.squeeze()
@@ -287,6 +291,7 @@ def softmax(y):
     return torch.Tensor(softmax)
 
 def BatchNorm(X): # (X - mu) / sigma -> Have to implement trainable parameters gamma and beta on this
+
     """ Simple non-trainable instance-normalisation of the input.
     """
     epsilon = 0.001  # To prevent overflow and ensure numerical stability
@@ -295,6 +300,7 @@ def BatchNorm(X): # (X - mu) / sigma -> Have to implement trainable parameters g
     return bn
 
 def conv_bn_relu(X,channels,stride,kernel_shape,padding,activation = 'sigmoid',initialize_weights = True,batchnorm = True,*args): # Refactoring conv_batchnorm_relu as one layer
+
     """ Applies a conv_batchnorm_relu layer on the input. The input is expected to be of shape
         (channels,width,height)
     """
@@ -318,8 +324,10 @@ def conv_bn_relu(X,channels,stride,kernel_shape,padding,activation = 'sigmoid',i
         return output1,X_im2col
 
 def flatten_and_dense(X,out_channels,*args,activation = 'relu', initialise_weights = False):
+
     """ Flattens the input and outputs a fully connected dense layer after applying an activation function
         Extra args correspond to weights and biases input"""
+        
     shape = X.shape
     X = torch.reshape(X,(-1,1)) # Flatten
     if initialise_weights:
@@ -343,12 +351,16 @@ def flatten_and_dense(X,out_channels,*args,activation = 'relu', initialise_weigh
         return output,weights,bias,output_shape
                                                                      
 def cross_entropy(y_pred,y):
+
     """ Cross entropy loss for classification purposes"""
+    
     epsilon = 0.001 # To prevent overflow and ensure numerical stability
     return sum(-y*np.log(y_pred+epsilon))
 
 def sigmoid(X):
+
     """ Sigmoid Activation Function"""
+    
     X[X < -300] = -300 # For stability
     X = X.detach().numpy()
     X = torch.FloatTensor((1/(1+(np.exp(-X)))))
@@ -358,13 +370,16 @@ def getIndexes(indicator_dictionary, val):
 
     ''' Get desired coordinates of val in an indicator matrix.
     val will be in the form of ijk cartesian coordinates'''
+    
     try:
         return indicator_dictionary[val]
     except:
         return []
     
 def residual(X1,X2,axis,concatenate=False):
+
     """Residual Layer applied between 2 feature maps"""
+    
     if concatenate:
         output = torch.cat(X1,X2,axis = axis)
     else:
@@ -372,7 +387,9 @@ def residual(X1,X2,axis,concatenate=False):
     return output
 
 def num_params(architecture): #
+
     """Returns total number of trainable and non_trainable parameters in the network"""
+    
     total_parameters = 0
     for layer in range(1,len(architecture)+1):
         weight_dims = np.shape(architecture['layer{}'.format(layer)][2])
@@ -390,8 +407,10 @@ def num_params(architecture): #
     return total_parameters
 
 def adam(g,beta_1,beta_2,m,v,t,lr):
+
     """Implementation of the Adam optimizer.
     This will return the running average of the mean and variance as well as the weight delta for updating parameters"""
+    
     if not isinstance(g,np.ndarray):
         g = g.detach().numpy()
     if not isinstance(m,np.ndarray):
@@ -412,8 +431,10 @@ def adam(g,beta_1,beta_2,m,v,t,lr):
     return grad,m,v
 
 def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
+
     """Performs a backward pass over the neural network.
     This involves calculating the gradients in each layer and storing them in the gradient_layerwise dictionary"""
+    
     for layer in range(len(architecture)-1,-1,-1):
             X_input,X_output,weightsi,biasi,X_input_im2col,imi,output_shapei,kernel_shapei,stridei,operationi,imxi = architecture['layer{}'.format(layer+1)]
 #             print("Operation is:{} and Layer is: {}".format(operationi,layer+1))
@@ -701,9 +722,11 @@ def backward_pass(architecture,gradient_layerwise,grad_weights,grad_bias):
     return
 
 def forward_pass(X,architecture):
+
     """Performs a forward pass over the neural network and stores the
     resulting weights and features in the architecture dictionary.
     """
+    
     architecture['layer1'][0] = X
     kernel_shape1 = architecture['layer1'][7]
     stride1 = architecture['layer1'][8]
@@ -825,8 +848,10 @@ def forward_pass(X,architecture):
     return y_pred
 
 def zero_gradients(architecture):
+
     """Initialising grad weights dictionary for each layer
       for the purpose of mini-batch gradient descent"""
+      
     grad_weights = {}
     grad_bias = {}
     
@@ -849,8 +874,10 @@ def zero_gradients(architecture):
     return grad_weights,grad_bias,m,v
 
 def update_weights(architecture,grad_weights,grad_bias,m,v,t,lr,optimizer="adam"):
+
     """Given the gradients, this function updates weights
     using the chosen optimizer (Adam or SGD)"""
+    
     for layer in range(len(architecture)):
         if not (grad_weights['layer{}'.format(layer+1)] is None) and grad_bias['layer{}'.format(layer+1)] is not None:
             grad_weightsi = grad_weights['layer{}'.format(layer+1)]
