@@ -1078,4 +1078,3 @@ if __name__ == "__main__":
     with open(os.path.join(save_path),'wb') as f:
         pickle.dump(architecture,f)
 
-
