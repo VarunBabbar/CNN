@@ -70,7 +70,7 @@ optional arguments:
  The output will be a Pickle file called MNIST_CNN saved in /Users/varunbabbar/Desktop. This file contains the saved weights and model architecture and can be used to perform inference.
  
  ## Inference Procedure
-Inference involves running the script Inference.py. This assumes you have a trained model and input image saved in your local filesystem. Here is the syntax for calling Inference.py through command line:
+Inference involves running the script Inference.py. This assumes you have a trained model as above and input image saved in your local filesystem. Here is the syntax for calling Inference.py through command line:
  ```
    usage: CNN_inference.py [-h] [--model_save_path MODEL_SAVE_PATH]
                         [--input_image INPUT_IMAGE]
@@ -90,7 +90,7 @@ arguments:
 
  ### Example usage:
  ```
- python3 CNN_inference.py --model_save_path /Users/varunbabbar/Desktop/CNN_Architecture --input_image /Users/varunbabbar/Desktop/4.jpg
+ python3 CNN_inference.py --model_save_path /Users/varunbabbar/Desktop/MNIST_CNN --input_image /Users/varunbabbar/Desktop/4.jpg
  
  Predicted Number: 4
  ```
