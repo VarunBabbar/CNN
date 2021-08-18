@@ -104,3 +104,4 @@ The file CNN_Notes.pdf is a self-contained mathematical background of how back p
 
 
 
+![](test.png)
